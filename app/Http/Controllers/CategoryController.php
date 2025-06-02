@@ -8,6 +8,13 @@ use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        // Hanya admin yang bisa mengakses fungsi create, edit, update, dan destroy
+        $this->middleware('auth');
+        $this->middleware('admin')->except(['index', 'show']);
+    }
+
     /**
      * Display a listing of the resource.
      */

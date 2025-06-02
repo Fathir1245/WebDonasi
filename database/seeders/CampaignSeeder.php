@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Campaign;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -18,6 +19,9 @@ class CampaignSeeder extends Seeder
         // Mendapatkan semua ID pengguna kecuali admin
         $userIds = User::where('is_admin', false)->pluck('id')->toArray();
         
+        // Mendapatkan semua kategori
+        $categories = Category::all();
+        
         // Data contoh kampanye
         $kampanye = [
             [
@@ -26,6 +30,7 @@ class CampaignSeeder extends Seeder
                 'target_amount' => 50000000,
                 'deadline' => now()->addMonths(3),
                 'status' => 'active',
+                'category_id' => $categories->where('name', 'Lingkungan')->first()->id,
             ],
             [
                 'title' => 'Pendidikan untuk Anak Kurang Mampu',
@@ -33,6 +38,7 @@ class CampaignSeeder extends Seeder
                 'target_amount' => 75000000,
                 'deadline' => now()->addMonths(6),
                 'status' => 'active',
+                'category_id' => $categories->where('name', 'Pendidikan')->first()->id,
             ],
             [
                 'title' => 'Bantuan Medis untuk Lansia',
@@ -40,6 +46,7 @@ class CampaignSeeder extends Seeder
                 'target_amount' => 100000000,
                 'deadline' => now()->addMonths(2),
                 'status' => 'active',
+                'category_id' => $categories->where('name', 'Kesehatan')->first()->id,
             ],
             [
                 'title' => 'Membangun Kembali Rumah Pasca Bencana Alam',
@@ -47,6 +54,7 @@ class CampaignSeeder extends Seeder
                 'target_amount' => 200000000,
                 'deadline' => now()->addMonths(4),
                 'status' => 'active',
+                'category_id' => $categories->where('name', 'Bencana Alam')->first()->id,
             ],
             [
                 'title' => 'Proyek Kebun Komunitas',
@@ -54,6 +62,7 @@ class CampaignSeeder extends Seeder
                 'target_amount' => 25000000,
                 'deadline' => now()->addMonths(2),
                 'status' => 'active',
+                'category_id' => $categories->where('name', 'Sosial')->first()->id,
             ],
         ];
 
@@ -92,6 +101,7 @@ class CampaignSeeder extends Seeder
                 'image' => $namaGambar,
                 'user_id' => $userId,
                 'status' => $dataKampanye['status'],
+                'category_id' => $dataKampanye['category_id'],
                 'created_at' => now()->subDays(rand(1, 30)), // Tanggal pembuatan acak dalam sebulan terakhir
             ]);
         }
