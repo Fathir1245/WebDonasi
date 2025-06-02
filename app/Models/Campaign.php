@@ -34,7 +34,10 @@ class Campaign extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class)->withDefault([
+            'name' => 'Uncategorized',
+            'slug' => 'uncategorized'
+        ]);
     }
 
     public function donations()

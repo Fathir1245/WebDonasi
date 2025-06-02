@@ -50,10 +50,6 @@ class CategorySeeder extends Seeder
                 'name' => 'Keagamaan',
                 'description' => 'Kampanye untuk kegiatan keagamaan dan pembangunan tempat ibadah'
             ],
-            [
-                'name' => 'Lainnya',
-                'description' => 'Kampanye untuk keperluan lain yang tidak termasuk kategori di atas'
-            ]
         ];
 
         foreach ($categories as $category) {

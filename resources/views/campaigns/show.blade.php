@@ -27,6 +27,7 @@
                             <div class="mt-6">
                                 <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-3">Campaign Details</h3>
                                 <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                    @if($campaign->category)
                                     <div class="flex justify-between mb-2">
                                         <span class="text-gray-600 dark:text-gray-300">Category:</span>
                                         <span class="font-medium text-gray-900 dark:text-white">
@@ -36,6 +37,7 @@
                                             </a>
                                         </span>
                                     </div>
+                                    @endif
                                     <div class="flex justify-between mb-2">
                                         <span class="text-gray-600 dark:text-gray-300">Created by:</span>
                                         <span class="font-medium text-gray-900 dark:text-white">{{ $campaign->user->name }}</span>
