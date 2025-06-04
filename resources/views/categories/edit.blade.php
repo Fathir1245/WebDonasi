@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Tambah Kategori Baru') }}
+                {{ __('Edit Kategori') }}
             </h2>
             <a href="{{ route('categories.index') }}" class="text-blue-600 hover:text-blue-800">
                 ← Kembali ke Daftar Kategori
@@ -20,8 +20,9 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('categories.store') }}" method="POST" class="space-y-6">
+                    <form action="{{ route('categories.update', $category) }}" method="POST" class="space-y-6">
                         @csrf
+                        @method('PUT')
 
                         <!-- Nama Kategori -->
                         <div>
@@ -30,7 +31,7 @@
                                          name="name" 
                                          type="text" 
                                          class="mt-1 block w-full" 
-                                         :value="old('name')" 
+                                         :value="old('name', $category->name)" 
                                          required 
                                          autofocus />
                             <x-input-error class="mt-2" :messages="$errors->get('name')" />
@@ -42,7 +43,7 @@
                             <textarea id="description" 
                                       name="description" 
                                       class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" 
-                                      rows="4">{{ old('description') }}</textarea>
+                                      rows="4">{{ old('description', $category->description) }}</textarea>
                             <x-input-error class="mt-2" :messages="$errors->get('description')" />
                         </div>
 
@@ -55,7 +56,7 @@
                                            name="is_active" 
                                            value="1" 
                                            class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
-                                           {{ old('is_active') ? 'checked' : '' }}>
+                                           {{ old('is_active', $category->is_active) ? 'checked' : '' }}>
                                     <span class="ml-2 text-sm text-gray-600">Aktif</span>
                                 </label>
                             </div>
@@ -64,7 +65,7 @@
 
                         <!-- Tombol Submit -->
                         <div class="flex items-center gap-4">
-                            <x-primary-button>{{ __('Simpan Kategori') }}</x-primary-button>
+                            <x-primary-button>{{ __('Simpan Perubahan') }}</x-primary-button>
                             <a href="{{ route('categories.index') }}" 
                                class="inline-flex items-center px-4 py-2 bg-gray-300 border border-transparent rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-400 focus:bg-gray-400 active:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                 Batal
@@ -75,4 +76,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+</x-app-layout> 
